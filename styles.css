@@ -10,50 +10,48 @@ body {
     color: #eef0f2;
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    padding: 40px 20px;
+    padding: 20px;
+    /* Reduced padding for mobile */
 }
 
 header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
+    /* Smaller for mobile */
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
 }
 
 /* --- Navigation Tabs --- */
 .tab-container {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
+    /* Tighter gap */
     flex-wrap: wrap;
 }
 
 .tab-button {
-    padding: 12px 24px;
+    padding: 10px 16px;
     border: none;
     border-radius: 8px;
     color: #888;
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    /* Scaled down */
     background-color: #1a1a1d;
-    /* Dark gray when not selected */
     text-transform: uppercase;
 }
 
-.tab-button:hover {
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Colors when a tab is ACTIVE */
+/* Tab Colors */
 .tab-button.active.science {
     background-color: #28a745;
     color: white;
@@ -87,17 +85,25 @@ h1 {
 .tab-button.active {
     font-weight: bold;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    transform: scale(1.05);
 }
 
-/* --- Table Area --- */
-#tables-container {
-    max-width: 1200px;
+/* --- Responsive Table Container --- */
+.table-wrapper {
+    overflow-x: auto;
+    /* Allows swiping on mobile */
     margin: 0 auto;
+    max-width: 1200px;
+    -webkit-overflow-scrolling: touch;
+}
+
+#tables-container {
     background: #141417;
     border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    /* Reduced for mobile */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    min-width: 600px;
+    /* Ensures table doesn't get squashed */
 }
 
 table {
@@ -107,30 +113,36 @@ table {
 
 th {
     text-align: center;
-    padding: 15px;
-    font-size: 0.75rem;
+    padding: 10px 5px;
+    font-size: 0.65rem;
     color: #666;
     text-transform: uppercase;
     border-bottom: 2px solid #222;
 }
 
 td {
-    padding: 18px 10px;
+    padding: 12px 5px;
     text-align: center;
     border-bottom: 1px solid #1e1e22;
+    font-size: 0.85rem;
 }
 
 td:first-child {
     text-align: left;
     font-weight: 600;
     color: #fff;
+    position: sticky;
+    /* Keeps champion name visible while scrolling */
+    left: 0;
+    background: #141417;
+    padding-left: 10px;
 }
 
 .score-pill {
     background: rgba(0, 255, 204, 0.1);
     color: #00ffcc;
-    padding: 6px 12px;
-    border-radius: 20px;
+    padding: 4px 8px;
+    border-radius: 15px;
     font-weight: 700;
     font-family: monospace;
 }
@@ -138,4 +150,32 @@ td:first-child {
 .gold-stat {
     color: #ffd700;
     font-weight: bold;
+}
+
+/* Tablet & Desktop Adjustments */
+@media (min-width: 768px) {
+    body {
+        padding: 40px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .tab-button {
+        font-size: 0.9rem;
+        padding: 12px 24px;
+    }
+
+    #tables-container {
+        padding: 30px;
+    }
+
+    th {
+        font-size: 0.75rem;
+    }
+
+    td {
+        font-size: 0.95rem;
+    }
 }

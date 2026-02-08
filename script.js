@@ -6,7 +6,7 @@ const GID_MAP = {
 };
 
 // ==========================================
-//   WEIGHT CONFIGURATION (Adjust these!)
+//    WEIGHT CONFIGURATION (Adjust these!)
 // ==========================================
 // These two must add up to 1000 to keep the score out of 1000
 const WEIGHT_TOTAL_STATS = 700;       // Importance of DMG, DEF, etc.
@@ -80,14 +80,14 @@ async function switchClass(className, event) {
 function renderTable(className, roster) {
     const container = document.getElementById('tables-container');
     container.innerHTML = `
-        <h2 style="margin-bottom:20px;">${className} Power Rankings</h2>
+        <h2 style="margin-bottom:20px; font-size: 1.2rem;">${className} Rankings</h2>
         <table>
             <thead>
                 <tr>
                     <th>Champion</th>
                     <th>Progression</th>
                     <th>DMG</th><th>DEF</th><th>DUR</th><th>SIM</th><th>UTL</th>
-                    <th>Power Score</th>
+                    <th>Score</th>
                     <th>Rank</th>
                 </tr>
             </thead>
@@ -102,7 +102,7 @@ function renderTable(className, roster) {
                         <td class="${parseFloat(c.simplicity) >= 10 ? 'gold-stat' : ''}">${c.simplicity || 0}</td>
                         <td class="${parseFloat(c.utility) >= 10 ? 'gold-stat' : ''}">${c.utility || 0}</td>
                         <td><span class="score-pill">${c.totalScore}</span></td>
-                        <td style="font-weight:700; color:#fff;">#${i + 1}</td>
+                        <td style="font-weight:700; color:#fff;">${i + 1}</td>
                     </tr>
                 `).join('')}
             </tbody>
