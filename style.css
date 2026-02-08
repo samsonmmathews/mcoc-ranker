@@ -1,7 +1,7 @@
 body {
-    background: #121214;
+    background: #0b0b0d;
     color: #e0e0e0;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     padding: 20px;
 }
 
@@ -10,58 +10,101 @@ header {
     margin-bottom: 20px;
 }
 
-#searchInput {
-    width: 100%;
-    max-width: 600px;
-    padding: 12px;
-    background: #222;
-    border: 1px solid #444;
-    color: #fff;
-    border-radius: 6px;
+/* Tab Styling */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px 0;
+    flex-wrap: wrap;
 }
 
-h2 {
-    color: #ffab00;
-    border-left: 5px solid #ffab00;
-    padding-left: 10px;
-    margin-top: 30px;
+.tab-btn {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    color: white;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px currentColor;
+}
+
+/* Class Colors */
+.science {
+    background-color: #32cd32;
+}
+
+/* Green */
+.skill {
+    background-color: #ff0000;
+}
+
+/* Red */
+.mutant {
+    background-color: #ffd700;
+    color: #000;
+}
+
+/* Yellow */
+.cosmic {
+    background-color: #00bfff;
+}
+
+/* Light Blue */
+.tech {
+    background-color: #00008b;
+}
+
+/* Dark Blue */
+.mystic {
+    background-color: #9400d3;
+}
+
+/* Violet */
+
+#searchInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    color: white;
+    margin-top: 10px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #1c1c1f;
-    margin-top: 10px;
+    background: #151518;
 }
 
 th,
 td {
-    padding: 12px;
-    border-bottom: 1px solid #333;
+    padding: 15px;
+    border-bottom: 1px solid #2a2a2e;
     text-align: left;
 }
 
 th {
-    background: #252529;
-    font-size: 0.8rem;
-    color: #aaa;
+    background: #1c1c21;
+    color: #888;
+    text-transform: uppercase;
+    font-size: 12px;
 }
 
-input[type="number"],
-select {
-    background: #2a2a2e;
-    color: #fff;
-    border: 1px solid #444;
-    padding: 5px;
-    width: 80px;
-}
-
-.total-score {
-    color: #00e676;
+.class-rank {
+    color: #ffab00;
     font-weight: bold;
 }
 
-.final-rank {
+.global-rank {
     color: #29b6f6;
-    font-weight: bold;
+    font-size: 0.9em;
 }

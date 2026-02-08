@@ -10,8 +10,18 @@
 <body>
     <header>
         <h1>MCOC 7-Star Tracker</h1>
-        <input type="text" id="searchInput" placeholder="Search champion name...">
         <div id="stats-summary">Loading...</div>
+
+        <div class="tab-container">
+            <button class="tab-btn science" onclick="switchClass('Science')">Science</button>
+            <button class="tab-btn skill" onclick="switchClass('Skill')">Skill</button>
+            <button class="tab-btn mutant" onclick="switchClass('Mutant')">Mutant</button>
+            <button class="tab-btn cosmic" onclick="switchClass('Cosmic')">Cosmic</button>
+            <button class="tab-btn tech" onclick="switchClass('Tech')">Tech</button>
+            <button class="tab-btn mystic" onclick="switchClass('Mystic')">Mystic</button>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="Search by name...">
     </header>
 
     <main id="tables-container"></main>
