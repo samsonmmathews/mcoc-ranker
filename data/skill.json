@@ -1,0 +1,9 @@
+[
+    { "id": "mbaku", "name": "M'Baku", "class": "Skill" },
+    { "id": "jj_jameson", "name": "J. Jonah Jameson", "class": "Skill" },
+    { "id": "bullseye", "name": "Bullseye", "class": "Skill" },
+    { "id": "kate_bishop", "name": "Kate Bishop", "class": "Skill" },
+    { "id": "baron_zemo", "name": "Baron Zemo", "class": "Skill" },
+    { "id": "hit_monkey", "name": "Hit-Monkey", "class": "Skill" },
+    { "id": "shang_chi", "name": "Shang-Chi", "class": "Skill" }
+]

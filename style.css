@@ -1,71 +1,67 @@
 body {
-    background-color: #0f0f12;
-    color: #d1d1d1;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 20px;
+    background: #121214;
+    color: #e0e0e0;
+    font-family: sans-serif;
+    padding: 20px;
 }
 
 header {
     text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
 }
 
-#stats-summary {
-    color: #aaa;
-    font-size: 0.9rem;
-    margin-top: 5px;
+#searchInput {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px;
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 6px;
 }
 
 h2 {
     color: #ffab00;
-    border-left: 4px solid #ffab00;
-    padding-left: 12px;
+    border-left: 5px solid #ffab00;
+    padding-left: 10px;
     margin-top: 30px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #16161a;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 20px;
+    background: #1c1c1f;
+    margin-top: 10px;
 }
 
 th,
 td {
-    padding: 14px;
+    padding: 12px;
+    border-bottom: 1px solid #333;
     text-align: left;
-    border-bottom: 1px solid #25252b;
 }
 
 th {
-    background-color: #202026;
-    color: #eee;
-    text-transform: uppercase;
+    background: #252529;
     font-size: 0.8rem;
+    color: #aaa;
 }
 
-input,
+input[type="number"],
 select {
-    background: #2a2a32;
-    color: white;
+    background: #2a2a2e;
+    color: #fff;
     border: 1px solid #444;
-    padding: 6px;
-    border-radius: 4px;
-    width: 100%;
+    padding: 5px;
+    width: 80px;
 }
 
 .total-score {
-    font-weight: bold;
     color: #00e676;
+    font-weight: bold;
 }
 
 .final-rank {
-    font-weight: bold;
     color: #29b6f6;
-    background: #1a2733;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-weight: bold;
 }

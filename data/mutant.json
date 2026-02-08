@@ -1,0 +1,9 @@
+[
+    { "id": "onslaught", "name": "Onslaught", "class": "Mutant" },
+    { "id": "bishop_7", "name": "Bishop", "class": "Mutant" },
+    { "id": "toad_7", "name": "Toad", "class": "Mutant" },
+    { "id": "emma_frost", "name": "Emma Frost (Reworked)", "class": "Mutant" },
+    { "id": "dani_moonstar", "name": "Dani Moonstar", "class": "Mutant" },
+    { "id": "domino_7", "name": "Domino", "class": "Mutant" },
+    { "id": "sunspot_7", "name": "Sunspot", "class": "Mutant" }
+]
