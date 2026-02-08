@@ -27,8 +27,8 @@ function calculateNormalizedScore(c) {
     const statsFinal = (statsSum / 50) * WEIGHT_TOTAL_STATS;
 
     // 2. Calculate Progression Score
-    // Max Rank is 4, Max Sig is 200
-    const rankNormalized = (parseFloat(c.rank) || 0) / 4;
+    // Max Rank is 6, Max Sig is 200
+    const rankNormalized = (parseFloat(c.rank) || 0) / 6;
     const sigNormalized = (parseFloat(c.sig_level) || 0) / 200;
 
     const progressionFinal = (
