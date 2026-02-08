@@ -1,108 +1,112 @@
-const classes = ["Science", "Skill", "Mutant", "Cosmic", "Tech", "Mystic"];
+// Replace with your Sheet ID (found between /d/ and /edit in your URL)
+const SHEET_ID = '2PACX-1vQYR-sUCrn2Z6dK78_eQ2E0CtDHjP_32vA3hsF-By9iQnO8rRdFgBvPdzaRRRsMlxbuzdGMOwHO6sXh';
+
+// Replace these numbers with the GID for each tab from your URL
+const GID_MAP = {
+    "Science": "0",
+    "Skill": "1150357155",
+    "Mutant": "1080622234",
+    "Cosmic": "1308401936",
+    "Tech": "1634787102",
+    "Mystic": "455966228"
+};
+
 const WEIGHT_RANK = 1000;
-const WEIGHT_SIG = 5;
+const WEIGHT_STATS = 100;
+const WEIGHT_SIG = 2;
 
-let myRoster = [];
-let activeClass = "Science"; // Default view
-let searchTerm = "";
+function calculateScore(c) {
+    const rankScore = (parseInt(c.rank) || 0) * WEIGHT_RANK;
+    const sigScore = (parseInt(c.sig_level) || 0) * WEIGHT_SIG;
 
-async function init() {
-    const fetchTasks = classes.map(cls =>
-        fetch(`./data/${cls.toLowerCase()}.json`).then(res => res.json())
-    );
+    // Performance Stats (out of 10)
+    const perfScore = (
+        (parseInt(c.damage) || 0) +
+        (parseInt(c.defense) || 0) +
+        (parseInt(c.durability) || 0) +
+        (parseInt(c.simplicity) || 0) +
+        (parseInt(c.utility) || 0)
+    ) * WEIGHT_STATS;
 
-    const results = await Promise.all(fetchTasks);
-    const allChamps = results.flat();
-    const saved = JSON.parse(localStorage.getItem('mcoc_7star_save')) || {};
-
-    myRoster = allChamps.map(champ => ({
-        ...champ,
-        rank: saved[champ.id]?.rank || 1,
-        sig: saved[champ.id]?.sig || 0
-    }));
-
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        searchTerm = e.target.value.toLowerCase();
-        render();
-    });
-
-    switchClass('Science'); // Set initial tab
+    return rankScore + sigScore + perfScore;
 }
 
-function switchClass(cls) {
-    activeClass = cls;
+async function switchClass(className) {
     document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.innerText === cls) btn.classList.add('active');
+        btn.classList.toggle('active', btn.innerText === className);
     });
-    render();
+
+    const container = document.getElementById('tables-container');
+    container.innerHTML = '<div class="loader">Updating Class Rankings...</div>';
+
+    try {
+        const csvUrl = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?gid=${GID_MAP[className]}&output=csv`;
+        const response = await fetch(csvUrl);
+        const data = await response.text();
+
+        const lines = data.split('\n');
+        const headers = lines[0].split(',').map(h => h.trim());
+
+        const roster = lines.slice(1).map(line => {
+            const values = line.split(',').map(v => v.trim());
+            let obj = {};
+            headers.forEach((header, i) => obj[header] = values[i]);
+            obj.totalScore = calculateScore(obj);
+            return obj;
+        }).filter(c => c.name);
+
+        // Sort: Highest Score first
+        roster.sort((a, b) => b.totalScore - a.totalScore);
+
+        renderTable(className, roster);
+    } catch (err) {
+        container.innerHTML = `<div style="color:red">Error loading data. Check your Google Sheet headers.</div>`;
+    }
 }
 
-function calculateScore(c) { return (c.rank * WEIGHT_RANK) + (c.sig * WEIGHT_SIG); }
-
-function render() {
+function renderTable(className, roster) {
     const container = document.getElementById('tables-container');
-    container.innerHTML = '';
 
-    // Sort the entire roster for Global Rank
-    const globalSorted = [...myRoster].sort((a, b) => calculateScore(b) - calculateScore(a));
+    // Helper function to check for perfect 10s
+    const formatStat = (val) => {
+        const isPerfect = parseInt(val) === 10;
+        return `<td class="stat-val ${isPerfect ? 'gold-stat' : ''}">${val || 0}</td>`;
+    };
 
-    // Filter by Active Tab and Search
-    const filteredList = myRoster.filter(c =>
-        c.class === activeClass && c.name.toLowerCase().includes(searchTerm)
-    );
-
-    // Sort by class rank
-    filteredList.sort((a, b) => calculateScore(b) - calculateScore(a));
-
-    const tableHTML = `
-        <h2>${activeClass} Champions</h2>
+    container.innerHTML = `
+        <h2>${className} Class Rankings</h2>
         <table>
             <thead>
                 <tr>
                     <th>Champion</th>
-                    <th>Rank (1-6)</th>
-                    <th>Sig (0-200)</th>
-                    <th>Score</th>
+                    <th>R/Sig</th>
+                    <th>DMG</th>
+                    <th>DEF</th>
+                    <th>DUR</th>
+                    <th>SIM</th>
+                    <th>UTL</th>
+                    <th>Total Score</th>
                     <th>Class Rank</th>
-                    <th>Global Rank</th>
                 </tr>
             </thead>
             <tbody>
-                ${filteredList.map((champ, index) => {
-        const score = calculateScore(champ);
-        const globalRank = globalSorted.findIndex(c => c.id === champ.id) + 1;
-        return `
-                        <tr>
-                            <td><strong>${champ.name}</strong></td>
-                            <td><select onchange="update('${champ.id}', 'rank', this.value)">
-                                ${[1, 2, 3, 4, 5, 6].map(r => `<option value="${r}" ${champ.rank == r ? 'selected' : ''}>R${r}</option>`).join('')}
-                            </select></td>
-                            <td><input type="number" value="${champ.sig}" onchange="update('${champ.id}', 'sig', this.value)"></td>
-                            <td class="total-score">${score}</td>
-                            <td class="class-rank">#${index + 1}</td>
-                            <td class="global-rank">#${globalRank} Overall</td>
-                        </tr>
-                    `;
-    }).join('')}
+                ${roster.map((c, i) => `
+                    <tr>
+                        <td><strong>${c.name}</strong></td>
+                        <td>R${c.rank} / S${c.sig_level}</td>
+                        ${formatStat(c.damage)}
+                        ${formatStat(c.defense)}
+                        ${formatStat(c.durability)}
+                        ${formatStat(c.simplicity)}
+                        ${formatStat(c.utility)}
+                        <td class="score">${c.totalScore}</td>
+                        <td class="rank-badge">#${i + 1}</td>
+                    </tr>
+                `).join('')}
             </tbody>
         </table>
     `;
-
-    container.innerHTML = tableHTML;
-    document.getElementById('stats-summary').innerText = `Total Roster: ${myRoster.length} Champions`;
 }
 
-function update(id, field, value) {
-    const champ = myRoster.find(c => c.id === id);
-    champ[field] = parseInt(value) || 0;
-
-    // Save state
-    const saveObj = {};
-    myRoster.forEach(c => saveObj[c.id] = { rank: c.rank, sig: c.sig });
-    localStorage.setItem('mcoc_7star_save', JSON.stringify(saveObj));
-
-    render();
-}
-
-init();
+// Start the app
+switchClass('Science');

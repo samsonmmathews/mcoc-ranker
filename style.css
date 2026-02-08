@@ -1,49 +1,78 @@
+/* --- Global Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background: #0b0b0d;
+    background-color: #0b0b0d;
+    /* Deep Battlerealm Black */
     color: #e0e0e0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
     padding: 20px;
 }
 
 header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
-/* Tab Styling */
+h1 {
+    font-size: 2.2rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* --- Navigation Tabs --- */
 .tab-container {
     display: flex;
     justify-content: center;
-    gap: 5px;
-    margin: 20px 0;
+    gap: 8px;
     flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .tab-btn {
+    padding: 14px 18px;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
     border-radius: 4px;
     color: white;
-    opacity: 0.6;
-    transition: 0.3s;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    opacity: 0.4;
+    min-width: 120px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+.tab-btn:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
 }
 
 .tab-btn.active {
     opacity: 1;
-    transform: scale(1.1);
-    box-shadow: 0 0 15px currentColor;
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    border-bottom: 3px solid #fff;
 }
 
-/* Class Colors */
+/* Official 2026 Class Colors */
 .science {
     background-color: #32cd32;
 }
 
 /* Green */
 .skill {
-    background-color: #ff0000;
+    background-color: #db2c2c;
 }
 
 /* Red */
@@ -59,7 +88,7 @@ header {
 
 /* Light Blue */
 .tech {
-    background-color: #00008b;
+    background-color: #163172;
 }
 
 /* Dark Blue */
@@ -69,42 +98,119 @@ header {
 
 /* Violet */
 
-#searchInput {
-    width: 100%;
-    max-width: 500px;
-    padding: 10px;
-    background: #1a1a1a;
-    border: 1px solid #444;
-    color: white;
-    margin-top: 10px;
+/* --- Main Content Area --- */
+#tables-container {
+    max-width: 1300px;
+    margin: 30px auto;
+    background: #151518;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    overflow-x: auto;
+    border: 1px solid #222;
 }
 
+h2 {
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+/* --- Table Styling --- */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #151518;
-}
-
-th,
-td {
-    padding: 15px;
-    border-bottom: 1px solid #2a2a2e;
-    text-align: left;
+    min-width: 950px;
 }
 
 th {
-    background: #1c1c21;
-    color: #888;
+    background-color: #1c1c21;
+    color: #666;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    font-size: 12px;
+    padding: 15px 5px;
+    text-align: center;
+    letter-spacing: 1px;
 }
 
-.class-rank {
-    color: #ffab00;
+td {
+    padding: 12px 5px;
+    text-align: center;
+    border-bottom: 1px solid #242429;
+    font-size: 0.9rem;
+}
+
+/* First Column: Champion Name */
+td:first-child {
+    text-align: left;
     font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+    padding-left: 15px;
+    width: 200px;
 }
 
-.global-rank {
-    color: #29b6f6;
-    font-size: 0.9em;
+/* Column for R/Sig */
+td:nth-child(2) {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+/* --- Performance Stats (DMG, DEF, etc.) --- */
+.stat-val {
+    color: #888;
+    width: 60px;
+}
+
+/* Perfect 10 Highlight */
+.gold-stat {
+    color: #ffd700 !important;
+    font-weight: bold;
+    background: rgba(255, 215, 0, 0.1);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Total Score Styling */
+.score {
+    color: #00ffcc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    width: 120px;
+}
+
+/* Rank Badge */
+.rank-badge {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* --- Visual Polish --- */
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.loader {
+    text-align: center;
+    padding: 60px;
+    color: #555;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+/* Custom Scrollbar for the Table */
+#tables-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+#tables-container::-webkit-scrollbar-track {
+    background: #0b0b0d;
+}
+
+#tables-container::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
 }

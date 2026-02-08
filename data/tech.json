@@ -1,9 +1,0 @@
-[
-    { "id": "iron_man_jr", "name": "Iron Man (Model 70)", "class": "Tech" },
-    { "id": "shuri_7", "name": "Shuri", "class": "Tech" },
-    { "id": "lady_deathstrike", "name": "Lady Deathstrike (Reworked)", "class": "Tech" },
-    { "id": "peni_parker", "name": "Peni Parker", "class": "Tech" },
-    { "id": "omega_sentinel", "name": "Omega Sentinel", "class": "Tech" },
-    { "id": "star_lord_7", "name": "Star-Lord", "class": "Tech" },
-    { "id": "yondu_7", "name": "Yondu", "class": "Tech" }
-]
