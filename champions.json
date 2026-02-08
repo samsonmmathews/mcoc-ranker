@@ -1,0 +1,62 @@
+[
+    {
+        "id": "blue_marvel",
+        "name": "Blue Marvel",
+        "class": "Cosmic"
+    },
+    {
+        "id": "mbaku",
+        "name": "M'Baku",
+        "class": "Skill" 
+    },
+    {
+        "id": "jj_jameson",
+        "name": "J. Jonah Jameson",
+        "class": "Skill"
+    },
+    {
+        "id": "onslaught",
+        "name": "Onslaught",
+        "class": "Mutant"
+    },
+    {
+        "id": "bullseye",
+        "name": "Bullseye",
+        "class": "Skill"
+    },
+    {
+        "id": "photon",
+        "name": "Photon",
+        "class": "Science"
+    },
+    {
+        "id": "serpent",
+        "name": "The Serpent",
+        "class": "Cosmic"
+    },
+    {
+        "id": "white_tiger",
+        "name": "White Tiger",
+        "class": "Mystic"
+    },
+    {
+        "id": "magik_7",
+        "name": "Magik (7* Buffed)",
+        "class": "Mystic"
+    },
+    {
+        "id": "hulk_7",
+        "name": "Hulk",
+        "class": "Science"
+    },
+    {
+        "id": "shuri",
+        "name": "Shuri",
+        "class": "Tech"
+    },
+    {
+        "id": "iron_man_jr",
+        "name": "Iron Man (Model 70)",
+        "class": "Tech"
+    }
+]
