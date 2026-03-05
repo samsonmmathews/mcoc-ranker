@@ -9,12 +9,13 @@ const GID_MAP = {
 //    WEIGHT CONFIGURATION (Adjust these!)
 // ==========================================
 // These two must add up to 1000 to keep the score out of 1000
-const WEIGHT_TOTAL_STATS = 700;       // Importance of DMG, DEF, etc.
-const WEIGHT_TOTAL_PROGRESSION = 300; // Importance of Rank and Sig
+const WEIGHT_TOTAL_STATS = 600;       // Importance of DMG, DEF, etc.
+const WEIGHT_TOTAL_PROGRESSION = 400; // Importance of Rank and Sig
 
 // Breakdown of Progression (How much of the 300 comes from Rank vs Sig)
-const WEIGHT_RANK_PART = 0.75;  // 75% of progression score comes from Rank
-const WEIGHT_SIG_PART = 0.25;   // 25% of progression score comes from Sig Level
+const WEIGHT_RANK_PART = 0.45;  // 45% of progression from Rank
+const WEIGHT_SIG_PART = 0.20;   // 20% of progression from Sig
+const WEIGHT_ASC_PART = 0.35;   // 35% of progression from Ascension
 // ==========================================
 
 function calculateNormalizedScore(c) {
@@ -27,13 +28,15 @@ function calculateNormalizedScore(c) {
     const statsFinal = (statsSum / 50) * WEIGHT_TOTAL_STATS;
 
     // 2. Calculate Progression Score
-    // Max Rank is 6, Max Sig is 200
+    // Max Rank is 6, Max Sig is 200, Max Ascension is 11
     const rankNormalized = (parseFloat(c.rank) || 0) / 6;
     const sigNormalized = (parseFloat(c.sig_level) || 0) / 200;
+    const ascNormalized = (parseFloat(c.ascension) || 0) / 11;
 
     const progressionFinal = (
         (rankNormalized * WEIGHT_RANK_PART) +
-        (sigNormalized * WEIGHT_SIG_PART)
+        (sigNormalized * WEIGHT_SIG_PART) + 
+        (ascNormalized * WEIGHT_ASC_PART)
     ) * WEIGHT_TOTAL_PROGRESSION;
 
     // Total Score
@@ -95,7 +98,10 @@ function renderTable(className, roster) {
                 ${roster.map((c, i) => `
                     <tr>
                         <td>${c.name}</td>
-                        <td style="color:#666; font-size:0.8rem;">R${c.rank} • S${c.sig_level}</td>
+                        <td style="color:#666; font-size:0.75rem; line-height:1.2;">
+                            R${c.rank} • S${c.sig_level}<br>
+                            <span style="color:#00ffcc; font-weight:bold;">ASC LV.${c.ascension || 0}</span>
+                        </td>
                         <td class="${parseFloat(c.damage) >= 10 ? 'gold-stat' : ''}">${c.damage || 0}</td>
                         <td class="${parseFloat(c.defense) >= 10 ? 'gold-stat' : ''}">${c.defense || 0}</td>
                         <td class="${parseFloat(c.durability) >= 10 ? 'gold-stat' : ''}">${c.durability || 0}</td>
