@@ -99,8 +99,8 @@ function renderTable(className, roster) {
                     <tr>
                         <td>${c.name}</td>
                         <td style="color:#666; font-size:0.75rem; line-height:1.2;">
-                            R${c.rank} • S${c.sig_level}<br>
-                            <span style="color:#00ffcc; font-weight:bold;">ASC LV.${c.ascension || 0}</span>
+                            R${c.rank} • S${c.sig_level}
+                            <span style="color:#00ffcc; font-weight:bold;">(${c.ascension || 0})</span>
                         </td>
                         <td class="${parseFloat(c.damage) >= 10 ? 'gold-stat' : ''}">${c.damage || 0}</td>
                         <td class="${parseFloat(c.defense) >= 10 ? 'gold-stat' : ''}">${c.defense || 0}</td>
