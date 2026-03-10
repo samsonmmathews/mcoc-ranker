@@ -12,20 +12,34 @@ const GID_MAP = {
 const WEIGHT_TOTAL_STATS = 600;       // Importance of DMG, DEF, etc.
 const WEIGHT_TOTAL_PROGRESSION = 400; // Importance of Rank and Sig
 
-// Breakdown of Progression (How much of the 300 comes from Rank vs Sig)
+// --- 1. Performance Stat Weights ---
+// These 5 should ideally add up to 1.0 (100%)
+const WEIGHT_DAMAGE = 0.33;
+const WEIGHT_DEFENSE = 0.14;
+const WEIGHT_DURABILITY = 0.25;
+const WEIGHT_SIMPLICITY = 0.10;
+const WEIGHT_UTILITY = 0.18;
+
+// --- 2. Progression Weights ---
+// These 3 should add up to 1.0 (100%)
 const WEIGHT_RANK_PART = 0.45;  // 45% of progression from Rank
 const WEIGHT_SIG_PART = 0.20;   // 20% of progression from Sig
 const WEIGHT_ASC_PART = 0.35;   // 35% of progression from Ascension
 // ==========================================
 
 function calculateNormalizedScore(c) {
-    // 1. Calculate Performance Score (0 to 50 base)
-    const statsSum = (parseFloat(c.damage) || 0) + (parseFloat(c.defense) || 0) +
-        (parseFloat(c.durability) || 0) + (parseFloat(c.simplicity) || 0) +
-        (parseFloat(c.utility) || 0);
+    // 1. Calculate Weighted Performance Score
+    // We multiply each stat (out of 10) by its specific weight
+    const weightedStatsSum = 
+        ((parseFloat(c.damage) || 0) * WEIGHT_DAMAGE) +
+        ((parseFloat(c.defense) || 0) * WEIGHT_DEFENSE) +
+        ((parseFloat(c.durability) || 0) * WEIGHT_DURABILITY) +
+        ((parseFloat(c.simplicity) || 0) * WEIGHT_SIMPLICITY) +
+        ((parseFloat(c.utility) || 0) * WEIGHT_UTILITY);
 
-    // Apply the Stat weight (e.g., 700)
-    const statsFinal = (statsSum / 50) * WEIGHT_TOTAL_STATS;
+    // Since stats are out of 10, the max weightedStatsSum is 10.
+    // We divide by 10 to get a 0-1 percentage, then multiply by the total stat weight.
+    const statsFinal = (weightedStatsSum / 10) * WEIGHT_TOTAL_STATS;
 
     // 2. Calculate Progression Score
     // Max Rank is 6, Max Sig is 200, Max Ascension is 11
@@ -89,7 +103,7 @@ function renderTable(className, roster) {
                 <tr>
                     <th>Champion</th>
                     <th>Progression</th>
-                    <th>DMG</th><th>DEF</th><th>DUR</th><th>SIM</th><th>UTL</th>
+                    <th>Damage</th><th>Defense</th><th>Durability</th><th>Simplicity</th><th>Utility</th>
                     <th>Score</th>
                     <th>Rank</th>
                 </tr>
