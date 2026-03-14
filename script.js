@@ -101,7 +101,7 @@ function renderTable(className, roster) {
         <table>
             <thead>
                 <tr>
-                    <th>Rank</th>
+                    <th style="width: 40px;">Rank</th>
                     <th>Champion</th>
                     <th>Progression</th>
                     <th>Damage</th><th>Defense</th><th>Durability</th><th>Simplicity</th><th>Utility</th>
@@ -109,12 +109,20 @@ function renderTable(className, roster) {
                 </tr>
             </thead>
             <tbody>
-                ${roster.map((c, i) => `
+                ${roster.map((c, i) => {
+                    const ascVal = parseFloat(c.ascension) || 0;
+
+                    // Logic: If ascended, show the bold green tag. If 0, show nothing or standard text.
+                    const ascensionDisplay = ascVal >= 1
+                        ? `<span style="color:#00ffcc; font-weight:bold;">( ${ascVal} )</span>`
+                        : '';
+
+                    return `
                     <tr>
                         <td style="font-weight:700; color:#fff;">${i + 1}</td> <td>${c.name}</td>
                         <td style="color:#555; font-size:0.75rem; line-height:1.2;">
                             R${c.rank} • S${c.sig_level}
-                            <span style="color:#00ffcc; font-weight:bold;">(${c.ascension || 0})</span>
+                            ${ascensionDisplay}
                         </td>
                         <td class="${parseFloat(c.damage) >= 10 ? 'gold-stat' : ''}">${c.damage || 0}</td>
                         <td class="${parseFloat(c.defense) >= 10 ? 'gold-stat' : ''}">${c.defense || 0}</td>
@@ -123,7 +131,8 @@ function renderTable(className, roster) {
                         <td class="${parseFloat(c.utility) >= 10 ? 'gold-stat' : ''}">${c.utility || 0}</td>
                         <td><span class="score-pill">${c.totalScore}</span></td>
                     </tr>
-                `).join('')}
+                    `;
+            }).join('')}
             </tbody>
         </table>
     `;
