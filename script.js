@@ -101,18 +101,18 @@ function renderTable(className, roster) {
         <table>
             <thead>
                 <tr>
+                    <th>Rank</th>
                     <th>Champion</th>
                     <th>Progression</th>
                     <th>Damage</th><th>Defense</th><th>Durability</th><th>Simplicity</th><th>Utility</th>
                     <th>Score</th>
-                    <th>Rank</th>
                 </tr>
             </thead>
             <tbody>
                 ${roster.map((c, i) => `
                     <tr>
-                        <td>${c.name}</td>
-                        <td style="color:#666; font-size:0.75rem; line-height:1.2;">
+                        <td style="font-weight:700; color:#fff;">${i + 1}</td> <td>${c.name}</td>
+                        <td style="color:#555; font-size:0.75rem; line-height:1.2;">
                             R${c.rank} • S${c.sig_level}
                             <span style="color:#00ffcc; font-weight:bold;">(${c.ascension || 0})</span>
                         </td>
@@ -122,7 +122,6 @@ function renderTable(className, roster) {
                         <td class="${parseFloat(c.simplicity) >= 10 ? 'gold-stat' : ''}">${c.simplicity || 0}</td>
                         <td class="${parseFloat(c.utility) >= 10 ? 'gold-stat' : ''}">${c.utility || 0}</td>
                         <td><span class="score-pill">${c.totalScore}</span></td>
-                        <td style="font-weight:700; color:#fff;">${i + 1}</td>
                     </tr>
                 `).join('')}
             </tbody>
