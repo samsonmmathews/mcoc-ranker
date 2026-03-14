@@ -127,15 +127,34 @@ td {
     font-size: 0.85rem;
 }
 
-td:first-child {
+/* 1st Column: Rank */
+th:first-child, td:first-child {
     text-align: left;
     font-weight: 600;
     color: #fff;
     position: sticky;
-    /* Keeps champion name visible while scrolling */
     left: 0;
     background: #141417;
     padding-left: 10px;
+    z-index: 10;
+    min-width: 40px;
+}
+
+/* 2nd Column: Champion Name */
+th:nth-child(2), td:nth-child(2) {
+    position: sticky;
+    left: 40px;
+    background: #141417;
+    z-index: 10;
+    border-right: 2px solid #222;
+    text-align: left;
+    padding-left: 10px;
+    min-width: 120px;
+}
+
+/* Ensure the header text stays above everything when scrolling */
+th:first-child, th:nth-child(2) {
+    z-index: 11;
 }
 
 .score-pill {
