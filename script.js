@@ -14,11 +14,11 @@ const WEIGHT_TOTAL_PROGRESSION = 400; // Importance of Rank and Sig
 
 // --- 1. Performance Stat Weights ---
 // These 5 should ideally add up to 1.0 (100%)
-const WEIGHT_DAMAGE = 0.33;
+const WEIGHT_DAMAGE = 0.3;
 const WEIGHT_DEFENSE = 0.14;
-const WEIGHT_DURABILITY = 0.25;
-const WEIGHT_SIMPLICITY = 0.10;
-const WEIGHT_UTILITY = 0.18;
+const WEIGHT_DURABILITY = 0.24;
+const WEIGHT_SIMPLICITY = 0.12;
+const WEIGHT_UTILITY = 0.2;
 
 // --- 2. Progression Weights ---
 // These 3 should add up to 1.0 (100%)
